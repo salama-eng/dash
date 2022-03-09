@@ -1,5 +1,22 @@
 <?php
 include('connection.php');
+
+if(isset($_GET['delid']))
+{
+$rid=intval($_GET['delid']);
+$sql=mysqli_query($con,"delete from category where category_id=$rid");
+echo "<script>alert('Data deleted');</script>"; 
+echo "<script>window.location.href = 'index.php'</script>";     
+} 
+if(isset($_GET['delproid']))
+{
+$rid=intval($_GET['delproid']);
+$sql=mysqli_query($con,"delete from product where product_id=$rid");
+echo "<script>alert('Data deleted');</script>"; 
+echo "<script>window.location.href = 'index.php'</script>";     
+} 
+
+
 ?>
 
 
@@ -10,6 +27,7 @@ include('connection.php');
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 
@@ -18,11 +36,12 @@ include('connection.php');
   <!----- Category --------->
 
   <h1>categories</h1>
-  <a href="add_category.php?$counter_cat">Add categories</a>
-  <table>
+  <a class="addbtn" href="add_category.php?$counter_cat">Add categories</a>
+  <table  class="cat_table">
     <tr>
       <th>cat_id</th>
       <th>Category name</th>
+      <th>Action</th>
     </tr>
 
     <?php
@@ -38,7 +57,7 @@ include('connection.php');
           <td><?php echo $row['category_name']; ?> </td>
           <td>
             <a href="read.php?viewid=<?php echo htmlentities($row['category_id']); ?>">view</a>
-            <a href="edit.php?editid=<?php echo htmlentities($row['category_id']); ?>">edite</a>
+            <a href="editecat.php?editid=<?php echo htmlentities($row['category_id']); ?>">edite</a>
             <a href="index.php?delid=<?php echo ($row['category_id']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');">delete</a>
           </td>
         </tr>
@@ -61,9 +80,9 @@ include('connection.php');
   <!----- Category end--------->
 
   <!----- product view --------->
-  <a href="add_product.php">Add product</a>
-  <h2>Product Management</h2>
-  <table>
+  
+  <h2>Product Management</h2><a class="addbtn" href="add_product.php">Add product</a>
+  <table class="cat_table">
     <thead>
       <tr>
         <th>#</th>
@@ -71,6 +90,7 @@ include('connection.php');
         <th> Product Price</th>
         <th> Product Image</th>
         <th> Category</th>
+        <th> Action</th>
       </tr>
     </thead>
     <tbody>
@@ -96,9 +116,9 @@ include('connection.php');
             ?>
             <td><?php echo $squery; ?> </td>
             <td>
-              <a href="readproduct.php?viewproid=<?php echo htmlentities($row['product_id']); ?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-              <a href="editpro.php?editproid=<?php echo htmlentities($row['product_id']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-              <a href="index.php?delproid=<?php echo ($row['product_id']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
+              <a href="readproduct.php?viewproid=<?php echo htmlentities($row['product_id']); ?>">view</a>
+              <a href="edite_products.php?editproid=<?php echo htmlentities($row['product_id']); ?>">edite</a>
+              <a href="index.php?delproid=<?php echo ($row['product_id']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');">delete</a>
             </td>
           </tr>
         <?php
