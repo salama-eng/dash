@@ -34,7 +34,7 @@ echo "<script>window.location.href = 'index.php'</script>";
 <body>
 
   <!----- Category --------->
-
+<div class="container">
   <h1>categories</h1>
   <a class="addbtn" href="add_category.php?$counter_cat">Add categories</a>
   <table  class="cat_table">
@@ -135,7 +135,7 @@ echo "<script>window.location.href = 'index.php'</script>";
 
 
 
-
+</div>
 </body>
 
 </html>
